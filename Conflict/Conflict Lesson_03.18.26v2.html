@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECTLC Conflict Presentation</title>
+  <style>
+    :root {
+      --bg1: #0f172a;
+      --bg2: #1e293b;
+      --panel: rgba(255,255,255,0.08);
+      --panel-strong: rgba(255,255,255,0.14);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --accent: #f59e0b;
+      --accent2: #ef4444;
+      --accent3: #38bdf8;
+      --good: #22c55e;
+      --warn: #f97316;
+      --shadow: 0 25px 80px rgba(0,0,0,.35);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(245,158,11,.16), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(239,68,68,.18), transparent 28%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: var(--text);
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 48px 56px 96px;
+      position: absolute;
+      inset: 0;
+      animation: fade .35s ease;
+    }
+
+    .slide.active { display: flex; }
+
+    @keyframes fade {
+      from { opacity: 0; transform: scale(.985); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .shell {
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      flex: 0 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 18px;
+      color: var(--muted);
+      letter-spacing: .4px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: white;
+      box-shadow: 0 10px 24px rgba(239,68,68,.25);
+    }
+
+    .slide-tag {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
+
+    .content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 28px 34px 20px;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .centered {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 84px);
+      line-height: 1.02;
+      letter-spacing: -.03em;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: clamp(28px, 4.2vw, 56px);
+      line-height: 1.06;
+      letter-spacing: -.02em;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: clamp(20px, 2.3vw, 32px);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    p, li {
+      font-size: clamp(20px, 2vw, 31px);
+      line-height: 1.38;
+      color: var(--text);
+    }
+
+    .lead {
+      font-size: clamp(22px, 2.2vw, 34px);
+      color: var(--muted);
+      max-width: 1200px;
+    }
+
+    .accent {
+      color: #fde68a;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 22px;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: var(--radius);
+      padding: 24px 26px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .card h4 {
+      margin: 0 0 10px 0;
+      font-size: clamp(20px, 2vw, 30px);
+      color: #fde68a;
+    }
+
+    .big-quote {
+      font-size: clamp(30px, 3.6vw, 58px);
+      line-height: 1.16;
+      font-weight: 800;
+      max-width: 1200px;
+    }
+
+    .sub-quote {
+      font-size: clamp(22px, 2.1vw, 32px);
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 1100px;
+    }
+
+    ul.clean {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    ul.clean li {
+      position: relative;
+      padding-left: 26px;
+    }
+
+    ul.clean li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .7em;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(245,158,11,.09);
+    }
+
+    .number-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      padding: 18px;
+      min-height: 200px;
+    }
+
+    .step .num {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent3), var(--accent));
+      color: #08111f;
+      font-weight: 900;
+      margin-bottom: 14px;
+      font-size: 20px;
+    }
+
+    .step strong {
+      display: block;
+      font-size: clamp(20px, 1.9vw, 28px);
+      margin-bottom: 10px;
+    }
+
+    .step span {
+      display: block;
+      font-size: clamp(17px, 1.5vw, 23px);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .two-col-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .vs {
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .vs-mid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(28px, 3vw, 54px);
+      font-weight: 900;
+      color: #fde68a;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .bad { background: rgba(239,68,68,.14); color: #fecaca; }
+    .good { background: rgba(34,197,94,.16); color: #bbf7d0; }
+    .note { background: rgba(56,189,248,.16); color: #bae6fd; }
+
+    .prompt-box {
+      border-left: 6px solid var(--accent);
+      padding: 18px 22px;
+      background: rgba(245,158,11,.08);
+      border-radius: 0 22px 22px 0;
+    }
+
+    .footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      background: rgba(10,15,25,.55);
+      border-top: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), #fb7185);
+      color: #111827;
+      box-shadow: 0 10px 25px rgba(245,158,11,.23);
+    }
+
+    button.secondary {
+      background: rgba(255,255,255,.10);
+      color: var(--text);
+      box-shadow: none;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .counter {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .progress {
+      flex: 1;
+      max-width: 420px;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,.10);
+      margin-left: 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent3), var(--accent), var(--accent2));
+      transition: width .25s ease;
+    }
+
+    .mini {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1100px) {
+      .grid-2, .grid-3, .number-flow, .two-col-list, .vs {
+        grid-template-columns: 1fr;
+      }
+      .vs-mid { display: none; }
+      .slide { padding: 16px 16px 86px; }
+      .content { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+
+    <section class="slide active">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">C</div> ECTLC Life Skills Class</div>
+          <div class="slide-tag">Conflict</div>
+        </div>
+        <div class="content centered">
+          <div class="label note">Large Screen Presentation</div>
+          <h1>Conflict</h1>
+          <div class="big-quote">Conflict is normal. <span class="accent">Escalation is not.</span></div>
+          <div class="sub-quote">A class on understanding triggers, slowing reactions, and responding with strength instead of damage.</div>
+          <h3>Facilitator: Glenn Morgan</h3>
+        </div>
+        <div class="footer">
+          <div class="mini">Use on-screen buttons or keyboard arrows</div>
+          <div class="controls">
+            <button class="secondary" onclick="prevSlide()">◀ Prev</button>
+            <button onclick="nextSlide()">Next ▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">1</div> Why this matters at ECTLC</div>
+          <div class="slide-tag">Real Life</div>
+        </div>
+        <div class="content">
+          <h2>Conflict affects everything</h2>
+          <div class="grid-3">
+            <div class="card"><h4>Dorms</h4><p>Tension builds fast when people are tired, stressed, crowded, and carrying old wounds.</p></div>
+            <div class="card"><h4>Program Success</h4><p>One bad reaction can damage trust, create write-ups, break unity, or derail progress.</p></div>
+            <div class="card"><h4>Restoration</h4><p>Learning conflict skills is not just about peace, it is about maturity, responsibility, and future stability.</p></div>
+          </div>
+          <div class="prompt-box">
+            <p><strong>Bottom line:</strong> Many people do not fail because of lack of potential. They fail because they do not know how to handle pressure, disrespect, correction, or frustration.</p>
+          </div>
+        </div>
+        <div class="footer"><div class="mini">Conflict skill is life skill</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">2</div> Reframing conflict</div>
+          <div class="slide-tag">Core Idea</div>
+        </div>
+        <div class="content centered">
+          <div class="label bad">Critical truth</div>
+          <div class="big-quote">Conflict is not just about <span class="accent">what happened.</span></div>
+          <div class="big-quote">It is about the <span class="accent">meaning</span> you assign to what happened.</div>
+          <div class="sub-quote">The event matters, but the story you attach to the event often drives the emotional explosion.</div>
+        </div>
+        <div class="footer"><div class="mini">Event + meaning + emotion + reaction</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">3</div> The conflict formula</div>
+          <div class="slide-tag">How it starts</div>
+        </div>
+        <div class="content">
+          <h2>The formula behind most conflict</h2>
+          <div class="number-flow">
+            <div class="step"><div class="num">1</div><strong>Event</strong><span>Someone says something, does something, forgets something, gives correction, or uses a tone.</span></div>
+            <div class="step"><div class="num">2</div><strong>Story</strong><span>You interpret it. “They disrespected me.” “They think I am stupid.”</span></div>
+            <div class="step"><div class="num">3</div><strong>Emotion</strong><span>Anger, shame, hurt, fear, defensiveness, or pride rises.</span></div>
+            <div class="step"><div class="num">4</div><strong>Reaction</strong><span>Tone changes, body tightens, voice rises, sarcasm comes out, shutdown begins.</span></div>
+            <div class="step"><div class="num">5</div><strong>Escalation</strong><span>The other person reacts to your reaction, and now the real problem gets buried.</span></div>
+          </div>
+          <div class="prompt-box"><p><strong>Most conflict is no longer about the original issue.</strong> It becomes reactions to reactions.</p></div>
+        </div>
+        <div class="footer"><div class="mini">Interrupt the cycle early</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">4</div> Three traps</div>
+          <div class="slide-tag">Where we get lost</div>
+        </div>
+        <div class="content">
+          <h2>The 3 traps that pour gasoline on conflict</h2>
+          <div class="grid-3">
+            <div class="card"><div class="label bad">Trap 1</div><h4>Mind Reading</h4><p>Assuming intent without evidence.</p><p><em>“They did that on purpose.”</em></p></div>
+            <div class="card"><div class="label bad">Trap 2</div><h4>Personalizing</h4><p>Making everything about your value, your respect, your identity.</p><p><em>“This is about me.”</em></p></div>
+            <div class="card"><div class="label bad">Trap 3</div><h4>Story Building</h4><p>Adding a whole narrative to a moment.</p><p><em>“They always do this. Nobody respects me.”</em></p></div>
+          </div>
+        </div>
+        <div class="footer"><div class="mini">Assumption drives escalation</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">5</div> What is underneath anger</div>
+          <div class="slide-tag">Secondary emotion</div>
+        </div>
+        <div class="content">
+          <h2>Anger is often not the root emotion</h2>
+          <div class="vs">
+            <div class="card">
+              <div class="label bad">What shows up</div>
+              <ul class="clean">
+                <li>Raised voice</li>
+                <li>Sharp tone</li>
+                <li>Defensiveness</li>
+                <li>Threats, sarcasm, shutdown</li>
+              </ul>
+            </div>
+            <div class="vs-mid">↓</div>
+            <div class="card">
+              <div class="label good">What may be underneath</div>
+              <ul class="clean">
+                <li>Hurt</li>
+                <li>Fear</li>
+                <li>Embarrassment</li>
+                <li>Rejection</li>
+                <li>Shame</li>
+                <li>Feeling unheard or forgotten</li>
+              </ul>
+            </div>
+          </div>
+          <div class="prompt-box"><p><strong>Mature conflict work asks:</strong> “What am I actually feeling under this anger?”</p></div>
+        </div>
+        <div class="footer"><div class="mini">Address the real issue, not just the loud emotion</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">6</div> The pause</div>
+          <div class="slide-tag">Your power point</div>
+        </div>
+        <div class="content centered">
+          <div class="label note">This is the superpower</div>
+          <div class="big-quote">Between trigger and response, there is a <span class="accent">space.</span></div>
+          <div class="big-quote">In that space lies your <span class="accent">freedom.</span></div>
+          <div class="sub-quote">When you lose the pause, your body takes over. When you find the pause, your character can lead.</div>
+        </div>
+        <div class="footer"><div class="mini">Do not confuse impulse with wisdom</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <!-- NEW 4P SLIDE -->
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">7</div> The 4 P's</div>
+          <div class="slide-tag">Practical Tool</div>
+        </div>
+        <div class="content">
+          <h2>The 4 P's for Conflict</h2>
+          <div class="grid-2" style="grid-template-columns: 1fr 1fr;">
+            <div class="card">
+              <h4>Pause</h4>
+              <p>Do not react instantly. Slow the moment down before your emotions take over.</p>
+            </div>
+            <div class="card">
+              <h4>Be Present</h4>
+              <p>Do an inventory. What is happening in your mind and body right now?</p>
+            </div>
+            <div class="card">
+              <h4>Be Patient</h4>
+              <p>Give yourself and the other person time. Clarity comes after intensity drops.</p>
+            </div>
+            <div class="card">
+              <h4>Pray</h4>
+              <p>Invite God into the moment. Ask for wisdom, humility, and the right response.</p>
+            </div>
+          </div>
+          <div class="prompt-box"><p><strong>Flow:</strong> Pause → Present → Patient → Pray → Then Respond</p></div>
+        </div>
+        <div class="footer"><div class="mini">This is how you slow conflict down</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">8</div> Conflict reset</div>
+          <div class="slide-tag">5 step framework</div>
+        </div>
+        <div class="content">
+          <h2>The Conflict Reset Framework</h2>
+          <div class="number-flow">
+            <div class="step"><div class="num">1</div><strong>Pause</strong><span>Do not answer instantly. Give your nervous system time to settle.</span></div>
+            <div class="step"><div class="num">2</div><strong>Check the story</strong><span>Ask, “What am I telling myself right now?”</span></div>
+            <div class="step"><div class="num">3</div><strong>Fact vs story</strong><span>Separate what actually happened from what you believe it means.</span></div>
+            <div class="step"><div class="num">4</div><strong>Name the real emotion</strong><span>Is this anger, or is it hurt, fear, shame, or pride?</span></div>
+            <div class="step"><div class="num">5</div><strong>Choose response</strong><span>Ask, “What response will I respect tomorrow?”</span></div>
+          </div>
+        </div>
+        <div class="footer"><div class="mini">Skill beats impulse</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">9</div> Bad response vs strong response</div>
+          <div class="slide-tag">Language matters</div>
+        </div>
+        <div class="content">
+          <h2>Same conflict, different outcomes</h2>
+          <div class="two-col-list">
+            <div class="card">
+              <div class="label bad">Escalates</div>
+              <ul class="clean">
+                <li>“You always do this.”</li>
+                <li>“You are disrespecting me.”</li>
+                <li>“Whatever, I am done.”</li>
+                <li>Interrupting, mocking, threatening</li>
+                <li>Talking to win instead of understand</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="label good">De-escalates</div>
+              <ul class="clean">
+                <li>“Help me understand what you meant.”</li>
+                <li>“When that happened, I felt frustrated.”</li>
+                <li>“I need a minute so I can respond well.”</li>
+                <li>Ask one clarifying question</li>
+                <li>Address the issue, not the person</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="mini">Tone is part of the message</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">10</div> Real ECTLC examples</div>
+          <div class="slide-tag">Application</div>
+        </div>
+        <div class="content">
+          <h2>Where conflict shows up here</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Common flashpoints</h4>
+              <ul class="clean">
+                <li>Correction from staff or leadership</li>
+                <li>Roommate tension or dorm noise</li>
+                <li>Borrowing, boundaries, and shared space</li>
+                <li>Feeling disrespected in line, class, or chores</li>
+                <li>Passive aggressive tone, side comments, gossip</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Key question</h4>
+              <p class="lead">Am I reacting to <strong>this moment</strong>, or am I reacting to everything this moment is reminding me of?</p>
+              <div class="prompt-box"><p>Many present conflicts pull power from old wounds.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="mini">Triggers often have history attached</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">11</div> Accountability</div>
+          <div class="slide-tag">Hard truth</div>
+        </div>
+        <div class="content centered">
+          <div class="label bad">Important distinction</div>
+          <div class="big-quote">You may not be fully to blame for your wiring,</div>
+          <div class="big-quote">but you are still responsible for your <span class="accent">response.</span></div>
+          <div class="sub-quote">Healing matters. Grace matters. But maturity means owning the damage your reactions can cause.</div>
+        </div>
+        <div class="footer"><div class="mini">Responsibility is power, not punishment</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">12</div> Group discussion</div>
+          <div class="slide-tag">Final 10 Minutes</div>
+        </div>
+        <div class="content">
+          <h2>Full class discussion</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Discuss as a group</h4>
+              <ul class="clean">
+                <li>What kind of conflict gets you reactive the fastest?</li>
+                <li>Which trap gets you most, mind reading, personalizing, or story building?</li>
+                <li>What usually sits underneath your anger?</li>
+                <li>When have you made a conflict worse by reacting too fast?</li>
+                <li>What would it look like to pause and respond differently next time?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><div class="mini">Awareness first, then practice</div><div class="controls"><button class="secondary" onclick="prevSlide()">◀ Prev</button><button onclick="nextSlide()">Next ▶</button></div></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="shell">
+        <div class="topbar">
+          <div class="brand"><div class="brand-badge">13</div> Closing challenge</div>
+          <div class="slide-tag">Takeaway</div>
+        </div>
+        <div class="content centered">
+          <div class="label good">This week</div>
+          <h2>Practice one habit</h2>
+          <div class="grid-3" style="max-width:1200px;width:100%;">
+            <div class="card"><h4>Pause</h4><p>Do not answer instantly when triggered.</p></div>
+            <div class="card"><h4>Clarify</h4><p>Ask one honest question before assuming intent.</p></div>
+            <div class="card"><h4>Separate</h4><p>Fact vs story, every time conflict starts rising.</p></div>
+          </div>
+          <div class="big-quote" style="margin-top: 12px;">Conflict will happen.</div>
+          <div class="big-quote"><span class="accent">Escalation is a choice.</span></div>
+        </div>
+        <div class="footer">
+          <div style="display:flex;align-items:center;gap:16px;">
+            <div class="counter" id="counter">1 / 13</div>
+            <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+          </div>
+          <div class="controls">
+            <button class="secondary" onclick="prevSlide()">◀ Prev</button>
+            <button onclick="nextSlide()">Next ▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      const counter = document.getElementById('counter');
+      const progressBar = document.getElementById('progressBar');
+      if (counter) counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+      if (progressBar) progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+      if (e.key === 'Home') { currentSlide = 0; updateSlides(); }
+      if (e.key === 'End') { currentSlide = slides.length - 1; updateSlides(); }
+      if (e.key.toLowerCase() === 'f') {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+        else document.exitFullscreen().catch(() => {});
+      }
+    });
+
+    updateSlides();
+  </script>
+</body>
+</html>

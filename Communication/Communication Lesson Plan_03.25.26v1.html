@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECTLC Lesson Plan - Communication Lifecycle</title>
+<style>
+  :root{
+    --navy:#12355b;
+    --red:#c62828;
+    --gold:#d8a106;
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --line:#d7deea;
+    --green:#216e39;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.45;
+  }
+  .page{
+    width:8.5in;
+    margin:0 auto;
+    background:#fff;
+    padding:.5in .55in .55in;
+  }
+  .header{
+    border-bottom:4px solid var(--navy);
+    padding-bottom:12px;
+    margin-bottom:18px;
+  }
+  .eyebrow{
+    color:var(--red);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  h1{
+    margin:6px 0 8px;
+    color:var(--navy);
+    font-size:28px;
+    line-height:1.1;
+  }
+  .sub{
+    font-size:15px;
+    color:var(--muted);
+    margin:0;
+  }
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+    background:var(--card);
+    margin:14px 0;
+    page-break-inside:avoid;
+  }
+  h2{
+    margin:0 0 10px;
+    font-size:20px;
+    color:var(--navy);
+    border-left:6px solid var(--gold);
+    padding-left:10px;
+  }
+  h3{
+    margin:16px 0 8px;
+    font-size:17px;
+    color:var(--navy);
+  }
+  p{margin:8px 0}
+  ul{margin:8px 0 8px 20px; padding:0}
+  li{margin:5px 0}
+  .goalbox{
+    background:#f8fbff;
+    border:1px solid #cfe0f5;
+  }
+  .quote{
+    font-weight:700;
+    color:var(--red);
+    font-size:20px;
+    text-align:center;
+    margin:14px 0 6px;
+  }
+  .small{
+    font-size:12px;
+    color:var(--muted);
+  }
+  .flow-caption{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:8px;
+    text-align:center;
+  }
+  .step{
+    border-top:1px solid var(--line);
+    padding-top:10px;
+    margin-top:10px;
+  }
+  .badge{
+    display:inline-block;
+    min-width:32px;
+    text-align:center;
+    padding:5px 9px;
+    border-radius:999px;
+    color:#fff;
+    background:var(--navy);
+    font-weight:700;
+    font-size:13px;
+    margin-right:8px;
+  }
+  .danger{color:var(--red); font-weight:700;}
+  .good{color:var(--green); font-weight:700;}
+  .two-col{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:16px;
+  }
+  .script{
+    background:#faf7ee;
+    border:1px solid #eadcb1;
+    border-radius:12px;
+    padding:12px 14px;
+  }
+  .footer{
+    margin-top:18px;
+    padding-top:10px;
+    border-top:2px solid var(--line);
+    font-size:11px;
+    color:var(--muted);
+  }
+  .svg-wrap{
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:16px;
+    padding:14px;
+    margin:10px 0 14px;
+  }
+  @media print{
+    body{background:#fff}
+    .page{margin:0; width:auto; box-shadow:none}
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="eyebrow">ECTLC Lesson Plan</div>
+      <h1>The Communication Lifecycle</h1>
+      <p class="sub">Primary framework: <b>Intent Check → Sender → Medium → Receiver → Feedback</b><br>
+      Supporting principle: <b>Congruency</b>, what you think, what you say, and what you do should match.</p>
+    </div>
+
+    <div class="card goalbox">
+      <h2>Lesson Snapshot</h2>
+      <div class="grid2">
+        <div>
+          <p><b>Audience:</b> ECTLC Men’s, Women’s, and FRM participants</p>
+          <p><b>Length:</b> 30-45 minutes</p>
+          <p><b>Format:</b> Interactive teaching, discussion, and short application exercise</p>
+        </div>
+        <div>
+          <p><b>Big idea:</b> Communication is not complete when words leave your mouth. It is complete when the message is received accurately and confirmed through feedback.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Opening Question</h2>
+      <p><b>Ask the room:</b> “Have you ever said something and then thought, that is not what I meant?”</p>
+      <p><b>Follow up:</b> “Have you ever heard something and reacted strongly, then later realized you misunderstood it?”</p>
+      <div class="quote">A broken message can create real conflict, even when nobody started with bad words.</div>
+    </div>
+
+    <div class="card">
+      <h2>Centerpiece Graphic - The Communication Lifecycle</h2>
+      <div class="svg-wrap">
+        <svg viewBox="0 0 1100 460" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Communication lifecycle diagram">
+          <defs>
+            <marker id="arrow" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto">
+              <polygon points="0,0 14,7 0,14" fill="#12355b"/>
+            </marker>
+            <linearGradient id="bg1" x1="0" x2="1">
+              <stop offset="0%" stop-color="#f8fbff"/>
+              <stop offset="100%" stop-color="#eef5ff"/>
+            </linearGradient>
+          </defs>
+          <rect x="15" y="20" rx="24" ry="24" width="1070" height="420" fill="url(#bg1)" stroke="#d7deea" stroke-width="3"/>
+          <circle cx="115" cy="230" r="72" fill="#c62828"/>
+          <text x="115" y="218" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700" fill="#fff">INTENT</text>
+          <text x="115" y="247" text-anchor="middle" font-family="Arial" font-size="18" fill="#fff">Check</text>
+
+          <rect x="250" y="150" rx="22" ry="22" width="165" height="160" fill="#12355b"/>
+          <text x="333" y="214" text-anchor="middle" font-family="Arial" font-size="32" font-weight="700" fill="#fff">SENDER</text>
+          <text x="333" y="248" text-anchor="middle" font-family="Arial" font-size="18" fill="#dbeafe">Craft the message</text>
+
+          <rect x="470" y="150" rx="22" ry="22" width="165" height="160" fill="#d8a106"/>
+          <text x="552" y="214" text-anchor="middle" font-family="Arial" font-size="31" font-weight="700" fill="#1f2937">MEDIUM</text>
+          <text x="552" y="248" text-anchor="middle" font-family="Arial" font-size="18" fill="#1f2937">How it travels</text>
+
+          <rect x="690" y="150" rx="22" ry="22" width="165" height="160" fill="#216e39"/>
+          <text x="772" y="214" text-anchor="middle" font-family="Arial" font-size="30" font-weight="700" fill="#fff">RECEIVER</text>
+          <text x="772" y="248" text-anchor="middle" font-family="Arial" font-size="18" fill="#e6f4ea">How it is heard</text>
+
+          <rect x="910" y="150" rx="22" ry="22" width="125" height="160" fill="#7c3aed"/>
+          <text x="972" y="210" text-anchor="middle" font-family="Arial" font-size="30" font-weight="700" fill="#fff">FEED</text>
+          <text x="972" y="244" text-anchor="middle" font-family="Arial" font-size="30" font-weight="700" fill="#fff">BACK</text>
+
+          <line x1="190" y1="230" x2="240" y2="230" stroke="#12355b" stroke-width="8" marker-end="url(#arrow)"/>
+          <line x1="420" y1="230" x2="460" y2="230" stroke="#12355b" stroke-width="8" marker-end="url(#arrow)"/>
+          <line x1="640" y1="230" x2="680" y2="230" stroke="#12355b" stroke-width="8" marker-end="url(#arrow)"/>
+          <line x1="860" y1="230" x2="900" y2="230" stroke="#12355b" stroke-width="8" marker-end="url(#arrow)"/>
+
+          <path d="M 970 330 C 960 395, 755 425, 552 425 C 330 425, 175 398, 145 330" fill="none" stroke="#7c3aed" stroke-width="8" marker-end="url(#arrow)"/>
+          <text x="558" y="407" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700" fill="#7c3aed">Understanding confirmed, corrected, or rejected</text>
+        </svg>
+      </div>
+      <p class="flow-caption">Teaching line: <b>Bad intent poisons everything that follows. Clear intent strengthens every step that follows.</b></p>
+
+      <div class="step"><span class="badge">1</span><b>Intent Check</b><br>
+      Before the message is crafted, the sender must check intent. Am I trying to help, clarify, correct, control, embarrass, punish, or win? <span class="danger">Bad intent poisons the cycle at the beginning.</span> Even a technically correct message can feel hostile if the intent is wrong.</div>
+
+      <div class="step"><span class="badge">2</span><b>Sender</b><br>
+      The sender builds the message. Effective communication starts with clarity, emotional regulation, timing, and congruency. Ask: What do I mean? What outcome do I want? What tone matches that outcome?</div>
+
+      <div class="step"><span class="badge">3</span><b>Medium</b><br>
+      The medium is how the message travels, face to face, phone, text, written note, body language, posture, facial expression, and tone. Important messages usually need a stronger medium. Sensitive correction rarely goes well through weak or rushed channels.</div>
+
+      <div class="step"><span class="badge">4</span><b>Receiver</b><br>
+      The receiver does not hear the message in a vacuum. People filter messages through stress, shame, fear, past experiences, assumptions, authority dynamics, and current mood. Effective communicators anticipate that the receiver may hear more than the literal words.</div>
+
+      <div class="step"><span class="badge">5</span><b>Feedback</b><br>
+      Feedback completes the cycle. The receiver signals what was actually heard. Feedback can confirm, distort, or repair the message. Strong communicators ask for feedback instead of assuming understanding, for example, “Tell me what you heard me say.”</div>
+    </div>
+
+    <div class="card">
+      <h2>How Effective Communication Uses Each Part to Craft the Message</h2>
+      <div class="two-col">
+        <div>
+          <h3>Intent Check</h3>
+          <ul>
+            <li>Start with honesty about motive</li>
+            <li>Do not use communication as a weapon</li>
+            <li>Decide whether the goal is clarity, care, correction, or collaboration</li>
+          </ul>
+
+          <h3>Sender</h3>
+          <ul>
+            <li>Choose clear words</li>
+            <li>Match tone to goal</li>
+            <li>Stay congruent, what you think, say, and do should match</li>
+          </ul>
+
+          <h3>Medium</h3>
+          <ul>
+            <li>Use the right channel for the weight of the message</li>
+            <li>Serious issues usually need direct conversation</li>
+            <li>Text is weak for emotional nuance</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Receiver</h3>
+          <ul>
+            <li>Assume the listener may carry stress or defensiveness</li>
+            <li>Leave room for clarification</li>
+            <li>Do not overload with too many points at once</li>
+          </ul>
+
+          <h3>Feedback</h3>
+          <ul>
+            <li>Check for understanding</li>
+            <li>Invite restatement</li>
+            <li>Repair early if misunderstanding appears</li>
+          </ul>
+
+          <div class="script">
+            <b>Simple repair lines:</b><br>
+            “That did not come out right. Let me say it again.”<br>
+            “What did you hear me say?”<br>
+            “What I mean is this...”<br>
+            “Let’s slow down and make sure we understand each other.”
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Congruency</h2>
+      <p><b>Definition:</b> Being congruent means what you think matches what you say, and what you say matches what you do.</p>
+      <ul>
+        <li><b>Incongruent:</b> “I’m not mad,” while your tone is sharp and your posture is aggressive.</li>
+        <li><b>Congruent:</b> “I am frustrated, and I want to address this calmly.”</li>
+      </ul>
+      <p><b>Teaching point:</b> Congruency increases trust. Incongruency creates confusion, suspicion, and conflict.</p>
+    </div>
+
+    <div class="card">
+      <h2>Where Communication Breaks Down Most Often</h2>
+      <ul>
+        <li><b>Bad intent at the beginning</b>, wanting to shame, control, or “win”</li>
+        <li><b>Sender distortion</b>, saying the wrong thing for the feeling underneath</li>
+        <li><b>Poor medium</b>, trying to handle serious issues through a weak channel</li>
+        <li><b>Receiver filtering</b>, hearing the message through fear, stress, or assumption</li>
+        <li><b>Missing feedback</b>, assuming understanding instead of confirming it</li>
+      </ul>
+      <div class="quote">Assumption replaces communication when feedback is missing.</div>
+    </div>
+
+    <div class="card">
+      <h2>ECTLC Application Discussion</h2>
+      <p><b>Ask the room:</b> Where does this matter most in daily life here?</p>
+      <ul>
+        <li>Roommates</li>
+        <li>Campus Advisors</li>
+        <li>Staff direction and correction</li>
+        <li>Work therapy settings</li>
+        <li>Family calls</li>
+        <li>Transportation coordination</li>
+      </ul>
+      <p><b>Key connection:</b> Many conflicts are not caused by the first sentence. They are caused by a damaged lifecycle, wrong intent, weak delivery, poor interpretation, or no feedback loop.</p>
+    </div>
+
+  </div>
+</body>
+</html>
